@@ -1,0 +1,8 @@
+{
+  "name": "pixiJS-TicTacToe",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/pixi.js": "~4.8.7"
+  }
+}

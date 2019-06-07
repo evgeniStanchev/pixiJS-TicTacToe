@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "none",
+    "target": "es5",
+    "sourceMap": true,
+    "outFile": "./bundle.js",
+    "declaration": true
+  },
+  "include": ["./src/**/*.ts"]
+}
