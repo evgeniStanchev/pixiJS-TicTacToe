@@ -26,6 +26,36 @@ declare namespace Game {
     }
 }
 declare namespace Game {
+    class HeadOrTail {
+        private _multiplier;
+        private readonly PATH_BITMAP_FONT;
+        readonly MAX_SIZE: number;
+        readonly MIN_SIZE: number;
+        readonly CHANGING_SIZE: number;
+        private _currentSize;
+        private _isGrowingUp;
+        private _isHead;
+        private _ticker;
+        private _app;
+        private _player1;
+        private _player2;
+        private _headTexture;
+        private _headSprite;
+        private _tailTexture;
+        private _tailSprite;
+        private _coinSprite;
+        private _namePlayer1;
+        private _namePlayer2;
+        constructor(app: PIXI.Application, player1: Player, player2: Player);
+        decrease(): void;
+        choosePlayer(texture: any): void;
+        increase(): void;
+        flipCoin(): void;
+        changeSize(): void;
+        onAssetsLoaded(): void;
+    }
+}
+declare namespace Game {
     class Main {
         private readonly app;
         constructor();
@@ -40,34 +70,16 @@ declare namespace Game {
     }
 }
 declare namespace Game {
-    class Utilities {
-        constructor();
-        static getBitmapTextField(text: any, px: any, textAlign: any, x: any, y: any): PIXI.extras.BitmapText;
-        static getErrorTextField(text: any, px: any, x: any, y: any): PIXI.Text;
-    }
-}
-declare namespace Game {
-    class HeadOrTail {
-        readonly MAX_SIZE: number;
-        readonly MIN_SIZE: number;
-        readonly CHANGING_SIZE: number;
-        private _app;
-        private _player1;
-        private _player2;
-        private _headTexture;
-        private _headSprite;
-        private _tailTexture;
-        private _tailSprite;
-        private _coinSprite;
-        private _namePlayer1;
-        private _namePlayer2;
-        constructor(app: PIXI.Application, player1: Player, player2: Player);
-    }
-}
-declare namespace Game {
     class Player {
         private readonly _name;
         constructor(name: any);
         readonly name: string;
+    }
+}
+declare namespace Game {
+    class Utilities {
+        constructor();
+        static getBitmapTextField(text: any, px: any, textAlign: any, x: any, y: any): PIXI.extras.BitmapText;
+        static getErrorTextField(text: any, px: any, x: any, y: any): PIXI.Text;
     }
 }
