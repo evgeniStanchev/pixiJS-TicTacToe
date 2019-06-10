@@ -38,19 +38,59 @@ var Game;
             this.app = app;
             PIXI.loader.add('desyrel', this.PATH_BITMAP_FONT + 'desyrel.xml').load(this.onAssetsLoaded.bind(this));
             this._mainContainer = new PIXI.Container();
-            this.background = new Game.Background(this.app.screen.width / 2, this.app.screen.height / 2, 'assets/tictactoe-background.jpg');
+            this._background = new Game.Background(this.app.screen.width / 2, this.app.screen.height / 2, 'assets/tictactoe-background.jpg');
             this.playButton = new Game.PlayButton(this.app, this);
-            new Game.HeadOrTail(this.app, new Game.Player("Evgeni"), new Game.Player("Stanchev"));
+            this._textInputPlayer1 = "Evgeni";
+            this._textInputPlayer2 = "Alexander";
             // this.playButton.on(`pointertap`, this.onClick());
             // // this.init();
         }
         ;
+        Object.defineProperty(GameMenu.prototype, "titleText", {
+            get: function () {
+                return this._titleText;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GameMenu.prototype, "mainContainer", {
-            // get titleText(): PIXI.extras.BitmapText {
-            //     return this._titleText;
-            // }
             get: function () {
                 return this._mainContainer;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameMenu.prototype, "textPlayer1", {
+            get: function () {
+                return this._textPlayer1;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameMenu.prototype, "textPlayer2", {
+            get: function () {
+                return this._textPlayer2;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameMenu.prototype, "background", {
+            get: function () {
+                return this._background;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameMenu.prototype, "textInputPlayer1", {
+            get: function () {
+                return this._textInputPlayer1;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameMenu.prototype, "textInputPlayer2", {
+            get: function () {
+                return this._textInputPlayer2;
             },
             enumerable: true,
             configurable: true
@@ -121,41 +161,28 @@ var Game;
 (function (Game) {
     var HeadOrTail = /** @class */ (function () {
         function HeadOrTail(app, player1, player2) {
-            var _this = this;
-            this._multiplier = Math.floor(Math.random() * 10) + 30;
-            this.PATH_BITMAP_FONT = "assets/bitmap-font/";
+            this._multiplier = Math.floor(Math.random() * 10) + 20;
             this.MAX_SIZE = 225;
             this.MIN_SIZE = 0;
             this.CHANGING_SIZE = 75;
+            this._app = app;
             this._headTexture = PIXI.Texture.from('assets/images/head.png');
+            this._headTexture.width = 225;
+            this._headTexture.height = 225;
             this._headSprite = new PIXI.Sprite(this._headTexture);
             this._tailTexture = PIXI.Texture.from('assets/images/tail.png');
+            this._tailTexture.width = 225;
+            this._tailTexture.height = 225;
             this._tailSprite = new PIXI.Sprite(this._tailTexture);
-            this._app = app;
             this._player1 = player1;
             this._player2 = player2;
-            this._ticker = new PIXI.ticker.Ticker;
+            this._ticker = PIXI.ticker.shared;
             this._currentSize = this.MAX_SIZE;
             this._isGrowingUp = false;
             this._isHead = true;
-            this._ticker.add(function () {
-                if (_this._currentSize === _this.MIN_SIZE) {
-                    _this.increase();
-                }
-                else if (_this._currentSize === _this.MAX_SIZE) {
-                    _this.decrease();
-                }
-                _this.changeSize();
-                console.log("run");
-            }).started;
-            PIXI.loader.add('desyrel', this.PATH_BITMAP_FONT + 'desyrel.xml').load(this.onAssetsLoaded.bind(this));
+            this.init();
         }
         HeadOrTail.prototype.decrease = function () {
-            if (--this._multiplier < 0 && this._currentSize === this.MAX_SIZE) {
-                //TODO stop(), don't destroy
-                this._app.ticker.destroy();
-                this.choosePlayer(this._coinSprite.texture);
-            }
             this._isGrowingUp = false;
         };
         HeadOrTail.prototype.choosePlayer = function (texture) {
@@ -191,7 +218,7 @@ var Game;
             }
             this._coinSprite.width = this._currentSize;
         };
-        HeadOrTail.prototype.onAssetsLoaded = function () {
+        HeadOrTail.prototype.init = function () {
             var _this = this;
             this._namePlayer1 = Game.Utilities.getBitmapTextField("Player1", 50, "center", this._app.screen.width / 6, this._app.screen.height / 10);
             this._app.stage.addChild(this._namePlayer1);
@@ -225,6 +252,29 @@ var Game;
             this._tailSprite.width = 100;
             this._tailSprite.height = 100;
             this._app.stage.addChild(this._tailSprite);
+            this.startTicker();
+        };
+        HeadOrTail.prototype.startTicker = function () {
+            var _this = this;
+            this._ticker.add(function () {
+                if (_this._currentSize === _this.MIN_SIZE) {
+                    _this.increase();
+                }
+                else if (_this._currentSize === _this.MAX_SIZE) {
+                    if (--_this._multiplier <= 0 && _this._currentSize === _this.MAX_SIZE) {
+                        //TODO stop(), don't destroy
+                        _this._ticker.autoStart = false;
+                        _this._ticker.stop();
+                        return;
+                        // this._app.ticker.destroy();
+                        _this.choosePlayer(_this._coinSprite.texture);
+                    }
+                    else {
+                        _this.decrease();
+                    }
+                }
+                _this.changeSize();
+            }).start;
         };
         return HeadOrTail;
     }());
@@ -238,8 +288,7 @@ var Game;
             this.app = new PIXI.Application(800, 600);
             document.body.appendChild(this.app.view);
             console.log('Main created.');
-            new Game.HeadOrTail(this.app, new Game.Player("Player1"), new Game.Player("Player2"));
-            // this.createMenu();
+            this.createMenu();
         }
         Main.prototype.createMenu = function () {
             new GameMenu(this.app);
@@ -266,18 +315,17 @@ var Game;
             _this.buttonMode = true;
             _this.on('pointertap', function () {
                 this.removeErrorTexts();
-                if (!this.isWrongInput()) {
-                    // mainContainer.removeChild(this);
-                    // mainContainer.removeChild(background);
-                    // gameMenu.mainContainer.removeChild(gameMenu.titleText);
-                    // mainContainer.removeChild(player1Text);
-                    // mainContainer.removeChild(player2Text);
-                    // mainContainer.removeChild(player1Input);
-                    // mainContainer.removeChild(player2Input);
-                    // const player1 = new Player(player1Input.text);
-                    // const player2 = new Player(player2Input.text);
-                    // new HeadOrTail(app, player1, player2);
-                }
+                // if (!this.isWrongInput()) {
+                gameMenu.mainContainer.removeChild(this);
+                gameMenu.mainContainer.removeChild(gameMenu.background);
+                gameMenu.mainContainer.removeChild(gameMenu.titleText);
+                gameMenu.mainContainer.removeChild(gameMenu.textPlayer1);
+                gameMenu.mainContainer.removeChild(gameMenu.textPlayer2);
+                gameMenu.mainContainer.removeChild(gameMenu.textInputPlayer1);
+                gameMenu.mainContainer.removeChild(gameMenu.textInputPlayer2);
+                var player1 = new Game.Player(gameMenu.textInputPlayer1.text);
+                var player2 = new Game.Player(gameMenu.textInputPlayer2.text);
+                new Game.HeadOrTail(app, player1, player2);
             });
             return _this;
         }

@@ -7,7 +7,7 @@ declare namespace Game {
 declare namespace Game {
     class GameMenu {
         private readonly PATH_BITMAP_FONT;
-        private readonly background;
+        private readonly _background;
         private readonly playButton;
         private readonly _mainContainer;
         private readonly app;
@@ -18,8 +18,15 @@ declare namespace Game {
         private _errorEqualNamesText;
         private _errorBiggerLengthText;
         private _textInputPlayer1;
+        private _textInputPlayer2;
         constructor(app: any);
+        readonly titleText: PIXI.extras.BitmapText;
         readonly mainContainer: PIXI.Container;
+        readonly textPlayer1: PIXI.extras.BitmapText;
+        readonly textPlayer2: PIXI.extras.BitmapText;
+        readonly background: Background;
+        readonly textInputPlayer1: any;
+        readonly textInputPlayer2: any;
         init(): void;
         onClick(): void;
         onAssetsLoaded(): void;
@@ -28,10 +35,13 @@ declare namespace Game {
 declare namespace Game {
     class HeadOrTail {
         private _multiplier;
-        private readonly PATH_BITMAP_FONT;
         readonly MAX_SIZE: number;
         readonly MIN_SIZE: number;
         readonly CHANGING_SIZE: number;
+        private readonly _headTexture;
+        private readonly _headSprite;
+        private readonly _tailTexture;
+        private readonly _tailSprite;
         private _currentSize;
         private _isGrowingUp;
         private _isHead;
@@ -39,10 +49,6 @@ declare namespace Game {
         private _app;
         private _player1;
         private _player2;
-        private _headTexture;
-        private _headSprite;
-        private _tailTexture;
-        private _tailSprite;
         private _coinSprite;
         private _namePlayer1;
         private _namePlayer2;
@@ -52,7 +58,8 @@ declare namespace Game {
         increase(): void;
         flipCoin(): void;
         changeSize(): void;
-        onAssetsLoaded(): void;
+        init(): void;
+        startTicker(): void;
     }
 }
 declare namespace Game {

@@ -14,18 +14,17 @@ namespace Game {
             this.buttonMode = true;
             this.on('pointertap', function () {
                     this.removeErrorTexts();
-                    if (!this.isWrongInput()) {
-                        // mainContainer.removeChild(this);
-                        // mainContainer.removeChild(background);
-                        // gameMenu.mainContainer.removeChild(gameMenu.titleText);
-                        // mainContainer.removeChild(player1Text);
-                        // mainContainer.removeChild(player2Text);
-                        // mainContainer.removeChild(player1Input);
-                        // mainContainer.removeChild(player2Input);
-                        // const player1 = new Player(player1Input.text);
-                        // const player2 = new Player(player2Input.text);
-                        // new HeadOrTail(app, player1, player2);
-                    }
+                    // if (!this.isWrongInput()) {
+                    gameMenu.mainContainer.removeChild(this);
+                    gameMenu.mainContainer.removeChild(gameMenu.background);
+                    gameMenu.mainContainer.removeChild(gameMenu.titleText);
+                    gameMenu.mainContainer.removeChild(gameMenu.textPlayer1);
+                    gameMenu.mainContainer.removeChild(gameMenu.textPlayer2);
+                    gameMenu.mainContainer.removeChild(gameMenu.textInputPlayer1);
+                    gameMenu.mainContainer.removeChild(gameMenu.textInputPlayer2);
+                    const player1 = new Player(gameMenu.textInputPlayer1.text);
+                    const player2 = new Player(gameMenu.textInputPlayer2.text);
+                    new HeadOrTail(app, player1, player2);
                 }
             );
         }

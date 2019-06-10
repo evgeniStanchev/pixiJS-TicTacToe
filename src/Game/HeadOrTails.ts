@@ -2,61 +2,50 @@ namespace Game {
 
     export class HeadOrTail {
 
-        private _multiplier: number = Math.floor(Math.random() * 10) + 30;
-        private readonly PATH_BITMAP_FONT: string = `assets/bitmap-font/`;
+        private _multiplier: number = Math.floor(Math.random() * 10) + 20;
         public readonly MAX_SIZE: number = 225;
         public readonly MIN_SIZE: number = 0;
         public readonly CHANGING_SIZE: number = 75;
+        private readonly _headTexture: PIXI.Texture;
+        private readonly _headSprite: PIXI.Sprite;
+        private readonly _tailTexture: PIXI.Texture;
+        private readonly _tailSprite: PIXI.Sprite;
 
-
-        private _currentSize : number;
-        private _isGrowingUp : boolean;
-        private _isHead : boolean;
+        private _currentSize: number;
+        private _isGrowingUp: boolean;
+        private _isHead: boolean;
         private _ticker: PIXI.ticker.Ticker;
         private _app: PIXI.Application;
         private _player1: Player;
         private _player2: Player;
-        private _headTexture: PIXI.Texture = PIXI.Texture.from('assets/images/head.png');
-        private _headSprite: PIXI.Sprite = new PIXI.Sprite(this._headTexture);
-        private _tailTexture: PIXI.Texture = PIXI.Texture.from('assets/images/tail.png');
-        private _tailSprite: PIXI.Sprite = new PIXI.Sprite(this._tailTexture);
         private _coinSprite: PIXI.Sprite;
         private _namePlayer1: PIXI.extras.BitmapText;
         private _namePlayer2: PIXI.extras.BitmapText;
 
         constructor(app: PIXI.Application, player1: Player, player2: Player) {
             this._app = app;
+            this._headTexture = PIXI.Texture.from('assets/images/head.png');
+            this._headTexture.width = 225;
+            this._headTexture.height = 225;
+            this._headSprite = new PIXI.Sprite(this._headTexture);
+            this._tailTexture = PIXI.Texture.from('assets/images/tail.png');
+            this._tailTexture.width = 225;
+            this._tailTexture.height = 225;
+            this._tailSprite = new PIXI.Sprite(this._tailTexture);
             this._player1 = player1;
             this._player2 = player2;
-            this._ticker = new PIXI.ticker.Ticker;
+            this._ticker = PIXI.ticker.shared;
             this._currentSize = this.MAX_SIZE;
             this._isGrowingUp = false;
             this._isHead = true;
-            this._ticker.add(() => {
-                if (this._currentSize === this.MIN_SIZE) {
-                    this.increase();
-                } else if (this._currentSize === this.MAX_SIZE) {
-                    this.decrease();
-                }
-                this.changeSize();
-                console.log("run");
-            }).started;
-
-            PIXI.loader.add('desyrel', this.PATH_BITMAP_FONT + 'desyrel.xml').load(this.onAssetsLoaded.bind(this));
-
-
+            this.init();
         }
 
-        decrease(){
-                if (--this._multiplier < 0 && this._currentSize === this.MAX_SIZE) {
-                    //TODO stop(), don't destroy
-                    this._app.ticker.destroy();
-                    this.choosePlayer(this._coinSprite.texture);
-                }
-                this._isGrowingUp = false;
-            }
+        decrease() {
+            this._isGrowingUp = false;
+        }
 
-         choosePlayer(texture) {
+        choosePlayer(texture) {
             if (texture === this._tailTexture) {
                 console.log("tail");
                 // tailSprite.x = 300;
@@ -67,7 +56,7 @@ namespace Game {
             }
         }
 
-        increase(){
+        increase() {
             this.flipCoin();
             this._isGrowingUp = true;
         }
@@ -81,7 +70,7 @@ namespace Game {
             this._isHead = !this._isHead;
         }
 
-        changeSize(){
+        changeSize() {
             if (this._isGrowingUp) {
                 this._currentSize += this.CHANGING_SIZE;
             } else {
@@ -90,7 +79,7 @@ namespace Game {
             this._coinSprite.width = this._currentSize;
         }
 
-        onAssetsLoaded() {
+        init() {
             this._namePlayer1 = Utilities.getBitmapTextField("Player1", 50, "center", this._app.screen.width / 6, this._app.screen.height / 10);
             this._app.stage.addChild(this._namePlayer1);
 
@@ -127,85 +116,28 @@ namespace Game {
             this._tailSprite.width = 100;
             this._tailSprite.height = 100;
             this._app.stage.addChild(this._tailSprite);
+
+            this.startTicker();
         }
 
-
-
-        //
-        //     // const tailSprite = new PIXI.Sprite(tailTexture);
-        //
-        //     let isHead = true;
-        //     let isGrowingUp = false;
-        //     let currentSize = MAX_SIZE;
-        //     let multiplier = Math.floor(Math.random() * 10) + 30;
-        //
-        //     coin.interactive = true;
-        //     coin.buttonMode = true;
-        //     coin.anchor.set(0.5);
-        //     coin.x = app.screen.width / 2;
-        //     coin.y = app.screen.height / 1.5;
-        //     coin.width = MAX_SIZE;
-        //     coin.height = MAX_SIZE;
-        //     coin.on('pointertap', () => {
-        //         multiplier = 1;
-        //     });
-        //     app.stage.addChild(coin);
-        //
-        //
-        //     //TODO use the PIXI.ticker.Ticker(), not app.ticker
-        //     app.ticker.add(() => {
-        //         if (currentSize === MIN_SIZE) {
-        //             increase();
-        //         } else if (currentSize === MAX_SIZE) {
-        //             decrease();
-        //         }
-        //         changeSize();
-        //         console.log("run");
-        //     });
-        //     // ticker.start();
-        //
-        //     function changeSize() {
-        //         if (isGrowingUp) {
-        //             currentSize += CHANGING_SIZE;
-        //         } else {
-        //             currentSize -= CHANGING_SIZE;
-        //         }
-        //         coin.width = currentSize;
-        //     }
-        //
-        //
-        //     function flipCoin() {
-        //         if (isHead) {
-        //             coin.texture = tailTexture;
-        //         } else {
-        //             coin.texture = headTexture;
-        //         }
-        //         isHead = !isHead;
-        //     }
-        //
-        //     function increase() {
-        //         flipCoin();
-        //         isGrowingUp = true;
-        //     }
-        //
-        //     function decrease() {
-        //         if (--multiplier < 0 && currentSize === MAX_SIZE) {
-        //             //TODO stop(), don't destroy
-        //             app.ticker.destroy();
-        //             choosePlayer(coin.texture);
-        //         }
-        //         isGrowingUp = false;
-        //     }
-        //
-        //     function choosePlayer(texture) {
-        //         if (texture === tailTexture) {
-        //             console.log("tail");
-        //             // tailSprite.x = 300;
-        //             // new Game(player2, player1);
-        //         } else {
-        //             console.log("head");
-        //             // new Game(player1, player2)
-        //         }
-        //     }
+        startTicker() {
+            this._ticker.add(() => {
+                if (this._currentSize === this.MIN_SIZE) {
+                    this.increase();
+                } else if (this._currentSize === this.MAX_SIZE) {
+                    if (--this._multiplier <= 0 && this._currentSize === this.MAX_SIZE) {
+                        //TODO stop(), don't destroy
+                        this._ticker.autoStart = false;
+                        this._ticker.stop();
+                        return;
+                        // this._app.ticker.destroy();
+                        this.choosePlayer(this._coinSprite.texture);
+                    } else {
+                        this.decrease();
+                    }
+                }
+                this.changeSize();
+            }).start;
+        }
     }
 }
