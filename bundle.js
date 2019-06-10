@@ -18,7 +18,7 @@ var Game;
         function Background(x, y, path) {
             var _this = _super.call(this) || this;
             console.log("Background created");
-            _this.texture = PIXI.Texture.fromImage(path);
+            _this.texture = PIXI.Texture.from(path);
             _this.anchor.set(0.5);
             _this.x = x;
             _this.y = y;
@@ -31,19 +31,20 @@ var Game;
 var Game;
 (function (Game) {
     var GameMenu = /** @class */ (function () {
-        // private _textInputPlayer1 : PixiTextInput;
-        function GameMenu(app) {
+        // private _errorEmptyInputText: PIXI.Text;
+        // private _errorEqualNamesText: PIXI.Text;
+        // private _errorBiggerLengthText: PIXI.Text;
+        // private _textInputPlayer1:  PIXI.TextInput;
+        function GameMenu(utils) {
             this.PATH_BITMAP_FONT = "assets/bitmap-font/";
+            this.app = new PIXI.Application(800, 600);
+            document.body.appendChild(this.app.view);
             console.log("Game menu created");
-            this.app = app;
+            GameMenu.Utilities = utils;
             PIXI.loader.add('desyrel', this.PATH_BITMAP_FONT + 'desyrel.xml').load(this.onAssetsLoaded.bind(this));
             this._mainContainer = new PIXI.Container();
             this._background = new Game.Background(this.app.screen.width / 2, this.app.screen.height / 2, 'assets/tictactoe-background.jpg');
             this.playButton = new Game.PlayButton(this.app, this);
-            this._textInputPlayer1 = "Evgeni";
-            this._textInputPlayer2 = "Alexander";
-            // this.playButton.on(`pointertap`, this.onClick());
-            // // this.init();
         }
         ;
         Object.defineProperty(GameMenu.prototype, "titleText", {
@@ -83,21 +84,18 @@ var Game;
         });
         Object.defineProperty(GameMenu.prototype, "textInputPlayer1", {
             get: function () {
-                return this._textInputPlayer1;
+                return this._inputPlayer1;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(GameMenu.prototype, "textInputPlayer2", {
             get: function () {
-                return this._textInputPlayer2;
+                return this._inputPlayer2;
             },
             enumerable: true,
             configurable: true
         });
-        GameMenu.prototype.init = function () {
-            // this._mainContainer.addChild(this._titleText);
-        };
         // onAssetsLoaded() {
         //     const bitmapFontText = new PIXI.extras.BitmapText('bitmap fonts are supported!\nWoo yay!', { font: '55px Desyrel', align: 'left' });
         //
@@ -126,32 +124,35 @@ var Game;
             var player2 = new Game.Player("Player 2");
             new Game.HeadOrTail(this.app, player1, player2);
         };
+        GameMenu.prototype.bitmapTextField = function (text, px, textAlign, x, y) {
+            var bitmapTextField = new PIXI.extras.BitmapText(text, {
+                font: px + 'px Desyrel',
+                align: textAlign
+            });
+            bitmapTextField.x = x;
+            bitmapTextField.y = y;
+            return bitmapTextField;
+        };
         GameMenu.prototype.onAssetsLoaded = function () {
-            this._titleText = Game.Utilities.getBitmapTextField("Tic-Tac-Toe", 75, "center", this.app.screen.width / 3.5, this.app.screen.height / 12);
-            this._textPlayer1 = Game.Utilities.getBitmapTextField("Player 1", 40, "center", this.app.screen.width / 10, this.app.screen.height / 1.7);
-            this._textPlayer2 = Game.Utilities.getBitmapTextField("Player 2", 40, "center", this.app.screen.width / 1.4, this.app.screen.height / 1.7);
-            this._errorEmptyInputText = Game.Utilities.getErrorTextField("Please, write names!", 30, this.app.screen.width / 3.25, this.app.screen.height / 25);
-            this._errorEqualNamesText = Game.Utilities.getErrorTextField("Names should be different!", 30, this.app.screen.width / 3.75, this.app.screen.height / 25);
-            this._errorBiggerLengthText = Game.Utilities.getErrorTextField("Name's length should be less than 10!", 30, this.app.screen.width / 6, this.app.screen.height / 25);
             this.app.stage.addChild(this._mainContainer);
             this._mainContainer.addChild(this.background);
             this._mainContainer.addChild(this.playButton);
+            this._titleText = this.bitmapTextField("Tic-Tac-Toe", 75, "center", this.app.screen.width / 3.5, this.app.screen.height / 12);
+            this._textPlayer1 = this.bitmapTextField("Player 1", 40, "center", this.app.screen.width / 10, this.app.screen.height / 1.6);
+            this._textPlayer2 = this.bitmapTextField("Player 2", 40, "center", this.app.screen.width / 1.4, this.app.screen.height / 1.6);
+            // this._errorEmptyInputText = Utilities.getErrorTextField("Please, write names!", 30, this.app.screen.width / 3.25, this.app.screen.height / 25);
+            // this._errorEqualNamesText = Utilities.getErrorTextField("Names should be different!", 30, this.app.screen.width / 3.75, this.app.screen.height / 25);
+            // this._errorBiggerLengthText = Utilities.getErrorTextField("Name's length should be less than 10!", 30, this.app.screen.width / 6, this.app.screen.height / 25);
             this._mainContainer.addChild(this._titleText);
             this._mainContainer.addChild(this._textPlayer1);
             this._mainContainer.addChild(this._textPlayer2);
             // this._mainContainer.addChild(this._errorEmptyInputText);
             // this._mainContainer.addChild(this._errorEqualNamesText);
             // this._mainContainer.addChild(this._errorBiggerLengthText);
-            // player1Input = UTILITIES.textInput(150, app.screen.width / 8.5, app.screen.height / 1.4);
-            // player2Input = UTILITIES.textInput(150, app.screen.width / 1.4, app.screen.height / 1.4);
-            // errorEmptyInputText = UTILITIES.errorTextField("Please, write names!", 30, app.screen.width / 3.25, app.screen.height / 25);
-            // errorEqualNamesText = UTILITIES.errorTextField("Names should be different!", 30, app.screen.width / 3.75, app.screen.height / 25);
-            // errorBiggerLengthText = UTILITIES.errorTextField("Name's length should be less than 10!", 30, app.screen.width / 6, app.screen.height / 25);
-            // this._mainContainer.addChild(player1Input);
-            // this._mainContainer.addChild(player2Input);
-            // this._mainContainer.addChild(player1Text)
-            // this._mainContainer.addChild(player2Text);
-            // this._mainContainer.addChild(player1Input);
+            this._inputPlayer1 = GameMenu.Utilities.getTextInput(this._textPlayer1);
+            this._inputPlayer2 = GameMenu.Utilities.getTextInput(this._textPlayer2);
+            this._mainContainer.addChild(this._inputPlayer1);
+            this._mainContainer.addChild(this._inputPlayer2);
         };
         return GameMenu;
     }());
@@ -161,23 +162,17 @@ var Game;
 (function (Game) {
     var HeadOrTail = /** @class */ (function () {
         function HeadOrTail(app, player1, player2) {
-            this._multiplier = Math.floor(Math.random() * 10) + 20;
-            this.MAX_SIZE = 225;
-            this.MIN_SIZE = 0;
+            this.MAX_SIZE_COIN = 225;
+            this.MIN_SIZE_COIN = 0;
             this.CHANGING_SIZE = 75;
-            this._app = app;
-            this._headTexture = PIXI.Texture.from('assets/images/head.png');
-            this._headTexture.width = 225;
-            this._headTexture.height = 225;
-            this._headSprite = new PIXI.Sprite(this._headTexture);
+            this._multiplier = Math.floor(Math.random() * 10) + 20;
             this._tailTexture = PIXI.Texture.from('assets/images/tail.png');
-            this._tailTexture.width = 225;
-            this._tailTexture.height = 225;
-            this._tailSprite = new PIXI.Sprite(this._tailTexture);
+            this._headTexture = PIXI.Texture.from('assets/images/head.png');
+            this._app = app;
             this._player1 = player1;
             this._player2 = player2;
             this._ticker = PIXI.ticker.shared;
-            this._currentSize = this.MAX_SIZE;
+            this._currentSize = this.MAX_SIZE_COIN;
             this._isGrowingUp = false;
             this._isHead = true;
             this.init();
@@ -188,7 +183,6 @@ var Game;
         HeadOrTail.prototype.choosePlayer = function (texture) {
             if (texture === this._tailTexture) {
                 console.log("tail");
-                // tailSprite.x = 300;
                 // new Game(player2, player1);
             }
             else {
@@ -220,61 +214,41 @@ var Game;
         };
         HeadOrTail.prototype.init = function () {
             var _this = this;
-            this._namePlayer1 = Game.Utilities.getBitmapTextField("Player1", 50, "center", this._app.screen.width / 6, this._app.screen.height / 10);
+            this._namePlayer1 = Game.GameMenu.Utilities.getBitmapTextField(this._player1.name, 50, "center", this._app.screen.width / 6, this._app.screen.height / 10);
             this._app.stage.addChild(this._namePlayer1);
-            this._namePlayer2 = Game.Utilities.getBitmapTextField("Player2", 50, "center", this._app.screen.width / 1.6, this._app.screen.height / 10);
+            this._namePlayer2 = Game.GameMenu.Utilities.getBitmapTextField(this._player2.name, 50, "center", this._app.screen.width / 1.6, this._app.screen.height / 10);
             this._app.stage.addChild(this._namePlayer2);
-            this._coinSprite = new PIXI.Sprite(this._headTexture);
-            this._coinSprite.interactive = true;
-            this._coinSprite.buttonMode = true;
-            this._coinSprite.anchor.set(0.5);
-            this._coinSprite.x = this._app.screen.width / 2;
-            this._coinSprite.y = this._app.screen.height / 1.5;
-            this._coinSprite.width = this.MAX_SIZE;
-            this._coinSprite.height = this.MAX_SIZE;
-            this._coinSprite.on('pointertap', function () {
+            this._coinSprite = Game.GameMenu.Utilities.getSprite(this._headTexture, true, true, this._app.screen.width / 2, this._app.screen.height / 1.5, this.MAX_SIZE_COIN, this.MAX_SIZE_COIN);
+            this._coinSprite.on("pointertap", function () {
                 _this._multiplier = 1;
             });
             this._app.stage.addChild(this._coinSprite);
-            this._headSprite.anchor.set(0.5);
-            this._headSprite.x = this._app.screen.width / 4;
-            this._headSprite.y = this._app.screen.height / 3.5;
-            this._headSprite.width = 100;
-            this._headSprite.height = 100;
-            this._headSprite.width = 100;
-            this._headSprite.height = 100;
+            this._headSprite = Game.GameMenu.Utilities.getSprite(this._headTexture, false, false, this._app.screen.width / 4, this._app.screen.height / 3.5, 100, 100);
             this._app.stage.addChild(this._headSprite);
-            this._tailSprite.anchor.set(0.5);
-            this._tailSprite.x = this._app.screen.width / 1.35;
-            this._tailSprite.y = this._app.screen.height / 3.25;
-            this._tailSprite.width = 100;
-            this._tailSprite.height = 100;
-            this._tailSprite.width = 100;
-            this._tailSprite.height = 100;
+            this._tailSprite = Game.GameMenu.Utilities.getSprite(this._tailTexture, false, false, this._app.screen.width / 1.35, this._app.screen.height / 3.25, 100, 100);
             this._app.stage.addChild(this._tailSprite);
             this.startTicker();
         };
+        //TODO stop() method is deprecated now. I must create another solution.
         HeadOrTail.prototype.startTicker = function () {
             var _this = this;
             this._ticker.add(function () {
-                if (_this._currentSize === _this.MIN_SIZE) {
+                if (_this._currentSize === _this.MIN_SIZE_COIN) {
                     _this.increase();
                 }
-                else if (_this._currentSize === _this.MAX_SIZE) {
-                    if (--_this._multiplier <= 0 && _this._currentSize === _this.MAX_SIZE) {
-                        //TODO stop(), don't destroy
+                else if (_this._currentSize === _this.MAX_SIZE_COIN) {
+                    if (--_this._multiplier <= 0 && _this._currentSize === _this.MAX_SIZE_COIN) {
                         _this._ticker.autoStart = false;
                         _this._ticker.stop();
-                        return;
-                        // this._app.ticker.destroy();
                         _this.choosePlayer(_this._coinSprite.texture);
+                        return;
                     }
                     else {
                         _this.decrease();
                     }
                 }
                 _this.changeSize();
-            }).start;
+            });
         };
         return HeadOrTail;
     }());
@@ -282,16 +256,14 @@ var Game;
 })(Game || (Game = {}));
 var Game;
 (function (Game) {
-    var GameMenu = Game.GameMenu;
     var Main = /** @class */ (function () {
-        function Main() {
-            this.app = new PIXI.Application(800, 600);
-            document.body.appendChild(this.app.view);
+        function Main(utils) {
+            this._utils = utils;
             console.log('Main created.');
             this.createMenu();
         }
         Main.prototype.createMenu = function () {
-            new GameMenu(this.app);
+            new Game.GameMenu(this._utils);
             console.log('Menu created!');
         };
         return Main;
@@ -326,7 +298,9 @@ var Game;
                 var player1 = new Game.Player(gameMenu.textInputPlayer1.text);
                 var player2 = new Game.Player(gameMenu.textInputPlayer2.text);
                 new Game.HeadOrTail(app, player1, player2);
-            });
+            }
+            // }
+            );
             return _this;
         }
         PlayButton.prototype.removeErrorTexts = function () {
@@ -367,35 +341,5 @@ var Game;
         return Player;
     }());
     Game.Player = Player;
-})(Game || (Game = {}));
-var Game;
-(function (Game) {
-    var Utilities = /** @class */ (function () {
-        function Utilities() {
-        }
-        Utilities.getBitmapTextField = function (text, px, textAlign, x, y) {
-            var bitmapTextField = new PIXI.extras.BitmapText(text, {
-                font: px + 'px Desyrel',
-                align: textAlign
-            });
-            bitmapTextField.x = x;
-            bitmapTextField.y = y;
-            return bitmapTextField;
-        };
-        Utilities.getErrorTextField = function (text, px, x, y) {
-            var richText = new PIXI.Text(text, new PIXI.TextStyle({
-                fontFamily: 'Arial',
-                fontSize: px,
-                fontStyle: 'italic',
-                fontWeight: 'bold',
-                fill: ['#FF0000']
-            }));
-            richText.x = x;
-            richText.y = y;
-            return richText;
-        };
-        return Utilities;
-    }());
-    Game.Utilities = Utilities;
 })(Game || (Game = {}));
 //# sourceMappingURL=bundle.js.map

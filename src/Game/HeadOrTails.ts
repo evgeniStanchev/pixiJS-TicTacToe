@@ -1,16 +1,16 @@
 namespace Game {
 
     export class HeadOrTail {
-
-        private _multiplier: number = Math.floor(Math.random() * 10) + 20;
-        public readonly MAX_SIZE: number = 225;
-        public readonly MIN_SIZE: number = 0;
+        public readonly MAX_SIZE_COIN: number = 225;
+        public readonly MIN_SIZE_COIN: number = 0;
         public readonly CHANGING_SIZE: number = 75;
         private readonly _headTexture: PIXI.Texture;
-        private readonly _headSprite: PIXI.Sprite;
+        private _headSprite: PIXI.Sprite;
         private readonly _tailTexture: PIXI.Texture;
-        private readonly _tailSprite: PIXI.Sprite;
+        private _tailSprite: PIXI.Sprite;
 
+
+        private _multiplier: number = Math.floor(Math.random() * 10) + 20;
         private _currentSize: number;
         private _isGrowingUp: boolean;
         private _isHead: boolean;
@@ -23,19 +23,13 @@ namespace Game {
         private _namePlayer2: PIXI.extras.BitmapText;
 
         constructor(app: PIXI.Application, player1: Player, player2: Player) {
-            this._app = app;
-            this._headTexture = PIXI.Texture.from('assets/images/head.png');
-            this._headTexture.width = 225;
-            this._headTexture.height = 225;
-            this._headSprite = new PIXI.Sprite(this._headTexture);
             this._tailTexture = PIXI.Texture.from('assets/images/tail.png');
-            this._tailTexture.width = 225;
-            this._tailTexture.height = 225;
-            this._tailSprite = new PIXI.Sprite(this._tailTexture);
+            this._headTexture = PIXI.Texture.from('assets/images/head.png');
+            this._app = app;
             this._player1 = player1;
             this._player2 = player2;
             this._ticker = PIXI.ticker.shared;
-            this._currentSize = this.MAX_SIZE;
+            this._currentSize = this.MAX_SIZE_COIN;
             this._isGrowingUp = false;
             this._isHead = true;
             this.init();
@@ -48,7 +42,6 @@ namespace Game {
         choosePlayer(texture) {
             if (texture === this._tailTexture) {
                 console.log("tail");
-                // tailSprite.x = 300;
                 // new Game(player2, player1);
             } else {
                 console.log("head");
@@ -80,64 +73,45 @@ namespace Game {
         }
 
         init() {
-            this._namePlayer1 = Utilities.getBitmapTextField("Player1", 50, "center", this._app.screen.width / 6, this._app.screen.height / 10);
+            this._namePlayer1 = GameMenu.Utilities.getBitmapTextField(this._player1.name, 50, "center", this._app.screen.width / 6, this._app.screen.height / 10);
             this._app.stage.addChild(this._namePlayer1);
 
-            this._namePlayer2 = Utilities.getBitmapTextField("Player2", 50, "center", this._app.screen.width / 1.6, this._app.screen.height / 10);
+            this._namePlayer2 = GameMenu.Utilities.getBitmapTextField(this._player2.name, 50, "center", this._app.screen.width / 1.6, this._app.screen.height / 10);
             this._app.stage.addChild(this._namePlayer2);
 
-            this._coinSprite = new PIXI.Sprite(this._headTexture);
-            this._coinSprite.interactive = true;
-            this._coinSprite.buttonMode = true;
-            this._coinSprite.anchor.set(0.5);
-            this._coinSprite.x = this._app.screen.width / 2;
-            this._coinSprite.y = this._app.screen.height / 1.5;
-            this._coinSprite.width = this.MAX_SIZE;
-            this._coinSprite.height = this.MAX_SIZE;
-            this._coinSprite.on('pointertap', () => {
+            this._coinSprite = GameMenu.Utilities.getSprite(this._headTexture, true, true, this._app.screen.width / 2, this._app.screen.height / 1.5, this.MAX_SIZE_COIN, this.MAX_SIZE_COIN);
+            this._coinSprite.on(`pointertap`, () => {
                 this._multiplier = 1;
             });
             this._app.stage.addChild(this._coinSprite);
 
-            this._headSprite.anchor.set(0.5);
-            this._headSprite.x = this._app.screen.width / 4;
-            this._headSprite.y = this._app.screen.height / 3.5;
-            this._headSprite.width = 100;
-            this._headSprite.height = 100;
-            this._headSprite.width = 100;
-            this._headSprite.height = 100;
+            this._headSprite = GameMenu.Utilities.getSprite(this._headTexture, false, false, this._app.screen.width / 4, this._app.screen.height / 3.5, 100, 100);
             this._app.stage.addChild(this._headSprite);
 
-            this._tailSprite.anchor.set(0.5);
-            this._tailSprite.x = this._app.screen.width / 1.35;
-            this._tailSprite.y = this._app.screen.height / 3.25;
-            this._tailSprite.width = 100;
-            this._tailSprite.height = 100;
-            this._tailSprite.width = 100;
-            this._tailSprite.height = 100;
+            this._tailSprite = GameMenu.Utilities.getSprite(this._tailTexture, false, false, this._app.screen.width / 1.35, this._app.screen.height / 3.25, 100, 100);
             this._app.stage.addChild(this._tailSprite);
 
             this.startTicker();
         }
 
+
+        //TODO stop() method is deprecated now. I must create another solution.
         startTicker() {
             this._ticker.add(() => {
-                if (this._currentSize === this.MIN_SIZE) {
+                if (this._currentSize === this.MIN_SIZE_COIN) {
                     this.increase();
-                } else if (this._currentSize === this.MAX_SIZE) {
-                    if (--this._multiplier <= 0 && this._currentSize === this.MAX_SIZE) {
-                        //TODO stop(), don't destroy
+                } else if (this._currentSize === this.MAX_SIZE_COIN) {
+                    if (--this._multiplier <= 0 && this._currentSize === this.MAX_SIZE_COIN) {
                         this._ticker.autoStart = false;
                         this._ticker.stop();
-                        return;
-                        // this._app.ticker.destroy();
                         this.choosePlayer(this._coinSprite.texture);
+                        return;
                     } else {
                         this.decrease();
                     }
                 }
                 this.changeSize();
-            }).start;
+            });
         }
     }
 }

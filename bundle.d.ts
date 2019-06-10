@@ -11,15 +11,13 @@ declare namespace Game {
         private readonly playButton;
         private readonly _mainContainer;
         private readonly app;
+        private _inputPlayer1;
+        private _inputPlayer2;
         private _titleText;
         private _textPlayer1;
         private _textPlayer2;
-        private _errorEmptyInputText;
-        private _errorEqualNamesText;
-        private _errorBiggerLengthText;
-        private _textInputPlayer1;
-        private _textInputPlayer2;
-        constructor(app: any);
+        static Utilities: any;
+        constructor(utils: any);
         readonly titleText: PIXI.extras.BitmapText;
         readonly mainContainer: PIXI.Container;
         readonly textPlayer1: PIXI.extras.BitmapText;
@@ -27,21 +25,21 @@ declare namespace Game {
         readonly background: Background;
         readonly textInputPlayer1: any;
         readonly textInputPlayer2: any;
-        init(): void;
         onClick(): void;
+        bitmapTextField(text: any, px: any, textAlign: any, x: any, y: any): PIXI.extras.BitmapText;
         onAssetsLoaded(): void;
     }
 }
 declare namespace Game {
     class HeadOrTail {
-        private _multiplier;
-        readonly MAX_SIZE: number;
-        readonly MIN_SIZE: number;
+        readonly MAX_SIZE_COIN: number;
+        readonly MIN_SIZE_COIN: number;
         readonly CHANGING_SIZE: number;
         private readonly _headTexture;
-        private readonly _headSprite;
+        private _headSprite;
         private readonly _tailTexture;
-        private readonly _tailSprite;
+        private _tailSprite;
+        private _multiplier;
         private _currentSize;
         private _isGrowingUp;
         private _isHead;
@@ -64,8 +62,8 @@ declare namespace Game {
 }
 declare namespace Game {
     class Main {
-        private readonly app;
-        constructor();
+        private readonly _utils;
+        constructor(utils: any);
         createMenu(): void;
     }
 }
@@ -81,12 +79,5 @@ declare namespace Game {
         private readonly _name;
         constructor(name: any);
         readonly name: string;
-    }
-}
-declare namespace Game {
-    class Utilities {
-        constructor();
-        static getBitmapTextField(text: any, px: any, textAlign: any, x: any, y: any): PIXI.extras.BitmapText;
-        static getErrorTextField(text: any, px: any, x: any, y: any): PIXI.Text;
     }
 }

@@ -26,6 +26,7 @@ namespace Game {
                     const player2 = new Player(gameMenu.textInputPlayer2.text);
                     new HeadOrTail(app, player1, player2);
                 }
+                // }
             );
         }
 

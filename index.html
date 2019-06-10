@@ -1,26 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Tic Tac Toe</title>
-    <link rel="stylesheet" type="text/css" href="assets/stylesheet/coin.css">
+    <link rel="stylesheet" type="text/html" href="Game/stylesheet.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.0.0/pixi.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.0.2/pixi.min.js"></script>
     <script src="bundle.js"></script>
-    <script src="src/Game/PixiTypeInput.js"></script>
-    <!--    <script src="source/HeadOrTail.js"></script>-->
-    <!--    <script src="Player.js"></script>-->
-    <!--    <script src="Game.js"></script>-->
-    <!--    <script src="Utilities.js"></script>-->
-    <!--    <script src="GameMenu.js"></script>-->
-    <!--    <script src="Main.js"></script>-->
+    <script src="src/Game/Utilities.js"></script>
+    <script src="src/Game/TextInput.js"></script>
 </head>
-<body onload="init();">
-<script>
+<body onload="init()">
+<div id="player1"></div>
+<div id="player2"></div>
+</body>
+<script type="text/javascript">
     function init() {
-        new Game.Main();
+        new Game.Main(new Utilities());
+        // const app = main.app;
+
+        //
+        // let player2Input = new PIXI.TextInput({
+        //     input: {
+        //         fontFamily: 'Arial',
+        //         fontSize: '16px',
+        //         padding: '5px',
+        //         width: '200px',
+        //         color: '#26272E'
+        //     },
+        //     box: {
+        //         default: {fill: 0xE8E9F3, rounded: 12, stroke: {color: 0xCBCEE0, width: 3}},
+        //         focused: {fill: 0xE1E3EE, rounded: 12, stroke: {color: 0xABAFC6, width: 3}},
+        //         disabled: {fill: 0xDBDBDB, rounded: 12}
+        //     }
+        // });
+        //
+        // player1Input.x = 80;
+        // player1Input.y = 130;
+        //
+        // player2Input.x = 180;
+        // player2Input.y = 2;
+        // app.stage.addChild(player1Input);
+        // app.stage.addChild(player2Input);
+
+
     }
 </script>
-
-</body>
 </html>
