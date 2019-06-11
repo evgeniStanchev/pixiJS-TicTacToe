@@ -10,14 +10,20 @@ declare namespace Game {
         private readonly _background;
         private readonly playButton;
         private readonly _mainContainer;
-        private readonly app;
+        private readonly _app;
         private _inputPlayer1;
         private _inputPlayer2;
         private _titleText;
         private _textPlayer1;
         private _textPlayer2;
         static Utilities: any;
+        private _errorEmptyInputText;
+        private _errorEqualNamesText;
+        private _errorBiggerLengthText;
         constructor(utils: any);
+        readonly errorEmptyInputText: PIXI.Text;
+        readonly errorEqualNamesText: PIXI.Text;
+        readonly errorBiggerLengthText: PIXI.Text;
         readonly titleText: PIXI.extras.BitmapText;
         readonly mainContainer: PIXI.Container;
         readonly textPlayer1: PIXI.extras.BitmapText;
@@ -25,8 +31,8 @@ declare namespace Game {
         readonly background: Background;
         readonly textInputPlayer1: any;
         readonly textInputPlayer2: any;
-        onClick(): void;
-        bitmapTextField(text: any, px: any, textAlign: any, x: any, y: any): PIXI.extras.BitmapText;
+        readonly app: PIXI.Application;
+        removeErrorTexts(): void;
         onAssetsLoaded(): void;
     }
 }
@@ -69,9 +75,17 @@ declare namespace Game {
 }
 declare namespace Game {
     class PlayButton extends PIXI.Sprite {
-        constructor(app: PIXI.Application, gameMenu: GameMenu);
-        removeErrorTexts(): void;
-        isWrongInput(): void;
+        static readonly BUTTON_PATH = "assets/playButton.png";
+        private readonly app;
+        private readonly gameMenu;
+        private readonly mainContainer;
+        private namePlayer1;
+        private namePlayer2;
+        constructor(gameMenu: GameMenu);
+        addFunctionallity(): void;
+        isWrongInput(): boolean;
+        startHeadOrTails(): void;
+        removeMainMenu(): void;
     }
 }
 declare namespace Game {

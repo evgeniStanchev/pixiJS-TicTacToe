@@ -31,22 +31,40 @@ var Game;
 var Game;
 (function (Game) {
     var GameMenu = /** @class */ (function () {
-        // private _errorEmptyInputText: PIXI.Text;
-        // private _errorEqualNamesText: PIXI.Text;
-        // private _errorBiggerLengthText: PIXI.Text;
-        // private _textInputPlayer1:  PIXI.TextInput;
         function GameMenu(utils) {
             this.PATH_BITMAP_FONT = "assets/bitmap-font/";
-            this.app = new PIXI.Application(800, 600);
-            document.body.appendChild(this.app.view);
+            this._app = new PIXI.Application(800, 600);
+            document.body.appendChild(this._app.view);
             console.log("Game menu created");
             GameMenu.Utilities = utils;
             PIXI.loader.add('desyrel', this.PATH_BITMAP_FONT + 'desyrel.xml').load(this.onAssetsLoaded.bind(this));
             this._mainContainer = new PIXI.Container();
-            this._background = new Game.Background(this.app.screen.width / 2, this.app.screen.height / 2, 'assets/tictactoe-background.jpg');
-            this.playButton = new Game.PlayButton(this.app, this);
+            this._background = new Game.Background(this._app.screen.width / 2, this._app.screen.height / 2, 'assets/tictactoe-background.jpg');
+            this.playButton = new Game.PlayButton(this);
         }
         ;
+        Object.defineProperty(GameMenu.prototype, "errorEmptyInputText", {
+            //Getters
+            get: function () {
+                return this._errorEmptyInputText;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameMenu.prototype, "errorEqualNamesText", {
+            get: function () {
+                return this._errorEqualNamesText;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameMenu.prototype, "errorBiggerLengthText", {
+            get: function () {
+                return this._errorBiggerLengthText;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GameMenu.prototype, "titleText", {
             get: function () {
                 return this._titleText;
@@ -96,63 +114,35 @@ var Game;
             enumerable: true,
             configurable: true
         });
-        // onAssetsLoaded() {
-        //     const bitmapFontText = new PIXI.extras.BitmapText('bitmap fonts are supported!\nWoo yay!', { font: '55px Desyrel', align: 'left' });
-        //
-        //     bitmapFontText.x = 50;
-        //     bitmapFontText.y = 200;
-        //
-        //     this.app.stage.addChild(bitmapFontText);
-        // }
-        GameMenu.prototype.onClick = function () {
-            // console.log(player1Input , " hhh " + player2Input);
-            // mainContainer.removeChild(emptyInputText);
-            // mainContainer.removeChild(equalNamesText);
-            // if (player1Input.text === "" || player2Input.text === "") {
-            //     mainContainer.addChild(emptyInputText);
-            // } else if (player1Input.text === player2Input.text) {
-            //     mainContainer.addChild(equalNamesText);
-            // } else {
-            //     mainContainer.removeChild(playButton);
-            //     mainContainer.removeChild(background);
-            //     mainContainer.removeChild(titleText);
-            //     mainContainer.removeChild(player1Text);
-            //     mainContainer.removeChild(player2Text);
-            //     mainContainer.removeChild(player1Input);
-            //     mainContainer.removeChild(player2Input);
-            var player1 = new Game.Player("Player 1");
-            var player2 = new Game.Player("Player 2");
-            new Game.HeadOrTail(this.app, player1, player2);
-        };
-        GameMenu.prototype.bitmapTextField = function (text, px, textAlign, x, y) {
-            var bitmapTextField = new PIXI.extras.BitmapText(text, {
-                font: px + 'px Desyrel',
-                align: textAlign
-            });
-            bitmapTextField.x = x;
-            bitmapTextField.y = y;
-            return bitmapTextField;
+        Object.defineProperty(GameMenu.prototype, "app", {
+            get: function () {
+                return this._app;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        GameMenu.prototype.removeErrorTexts = function () {
+            this.mainContainer.removeChild(this._errorEmptyInputText);
+            this.mainContainer.removeChild(this._errorEqualNamesText);
+            this.mainContainer.removeChild(this._errorBiggerLengthText);
         };
         GameMenu.prototype.onAssetsLoaded = function () {
-            this.app.stage.addChild(this._mainContainer);
+            this._app.stage.addChild(this._mainContainer);
             this._mainContainer.addChild(this.background);
             this._mainContainer.addChild(this.playButton);
-            this._titleText = this.bitmapTextField("Tic-Tac-Toe", 75, "center", this.app.screen.width / 3.5, this.app.screen.height / 12);
-            this._textPlayer1 = this.bitmapTextField("Player 1", 40, "center", this.app.screen.width / 10, this.app.screen.height / 1.6);
-            this._textPlayer2 = this.bitmapTextField("Player 2", 40, "center", this.app.screen.width / 1.4, this.app.screen.height / 1.6);
-            // this._errorEmptyInputText = Utilities.getErrorTextField("Please, write names!", 30, this.app.screen.width / 3.25, this.app.screen.height / 25);
-            // this._errorEqualNamesText = Utilities.getErrorTextField("Names should be different!", 30, this.app.screen.width / 3.75, this.app.screen.height / 25);
-            // this._errorBiggerLengthText = Utilities.getErrorTextField("Name's length should be less than 10!", 30, this.app.screen.width / 6, this.app.screen.height / 25);
+            this._titleText = GameMenu.Utilities.getBitmapTextField("Tic-Tac-Toe", 75, "center", this._app.screen.width / 3.5, this._app.screen.height / 12);
             this._mainContainer.addChild(this._titleText);
+            this._textPlayer1 = GameMenu.Utilities.getBitmapTextField("Player 1", 40, "center", this._app.screen.width / 10, this._app.screen.height / 1.6);
             this._mainContainer.addChild(this._textPlayer1);
+            this._textPlayer2 = GameMenu.Utilities.getBitmapTextField("Player 2", 40, "center", this._app.screen.width / 1.4, this._app.screen.height / 1.6);
             this._mainContainer.addChild(this._textPlayer2);
-            // this._mainContainer.addChild(this._errorEmptyInputText);
-            // this._mainContainer.addChild(this._errorEqualNamesText);
-            // this._mainContainer.addChild(this._errorBiggerLengthText);
             this._inputPlayer1 = GameMenu.Utilities.getTextInput(this._textPlayer1);
-            this._inputPlayer2 = GameMenu.Utilities.getTextInput(this._textPlayer2);
             this._mainContainer.addChild(this._inputPlayer1);
+            this._inputPlayer2 = GameMenu.Utilities.getTextInput(this._textPlayer2);
             this._mainContainer.addChild(this._inputPlayer2);
+            this._errorEmptyInputText = GameMenu.Utilities.getErrorTextField("Please, write names!", 30, this._app.screen.width / 3.25, this._app.screen.height / 25);
+            this._errorEqualNamesText = GameMenu.Utilities.getErrorTextField("Names should be different!", 30, this._app.screen.width / 3.75, this._app.screen.height / 25);
+            this._errorBiggerLengthText = GameMenu.Utilities.getErrorTextField("Name's length should be less than 10!", 30, this._app.screen.width / 6, this._app.screen.height / 25);
         };
         return GameMenu;
     }());
@@ -214,9 +204,9 @@ var Game;
         };
         HeadOrTail.prototype.init = function () {
             var _this = this;
-            this._namePlayer1 = Game.GameMenu.Utilities.getBitmapTextField(this._player1.name, 50, "center", this._app.screen.width / 6, this._app.screen.height / 10);
+            this._namePlayer1 = Game.GameMenu.Utilities.getBitmapTextField(this._player1.name, 50, "center", this._app.screen.width / 5.5, this._app.screen.height / 10);
             this._app.stage.addChild(this._namePlayer1);
-            this._namePlayer2 = Game.GameMenu.Utilities.getBitmapTextField(this._player2.name, 50, "center", this._app.screen.width / 1.6, this._app.screen.height / 10);
+            this._namePlayer2 = Game.GameMenu.Utilities.getBitmapTextField(this._player2.name, 50, "center", this._app.screen.width / 1.5, this._app.screen.height / 10);
             this._app.stage.addChild(this._namePlayer2);
             this._coinSprite = Game.GameMenu.Utilities.getSprite(this._headTexture, true, true, this._app.screen.width / 2, this._app.screen.height / 1.5, this.MAX_SIZE_COIN, this.MAX_SIZE_COIN);
             this._coinSprite.on("pointertap", function () {
@@ -259,12 +249,10 @@ var Game;
     var Main = /** @class */ (function () {
         function Main(utils) {
             this._utils = utils;
-            console.log('Main created.');
             this.createMenu();
         }
         Main.prototype.createMenu = function () {
             new Game.GameMenu(this._utils);
-            console.log('Menu created!');
         };
         return Main;
     }());
@@ -274,53 +262,63 @@ var Game;
 (function (Game) {
     var PlayButton = /** @class */ (function (_super) {
         __extends(PlayButton, _super);
-        function PlayButton(app, gameMenu) {
+        function PlayButton(gameMenu) {
             var _this = _super.call(this) || this;
-            console.log("Play button created!");
-            _this.texture = PIXI.Texture.fromImage("assets/playButton.png");
-            _this.x = app.screen.width / 2;
-            _this.y = app.screen.height / 1.15;
+            _this.app = gameMenu.app;
+            _this.gameMenu = gameMenu;
+            _this.mainContainer = _this.gameMenu.mainContainer;
+            _this.texture = PIXI.Texture.fromImage(PlayButton.BUTTON_PATH);
+            _this.x = _this.app.screen.width / 2;
+            _this.y = _this.app.screen.height / 1.15;
             _this.anchor.set(0.5);
             _this.width = 200;
             _this.height = 80;
             _this.interactive = true;
             _this.buttonMode = true;
-            _this.on('pointertap', function () {
-                this.removeErrorTexts();
-                // if (!this.isWrongInput()) {
-                gameMenu.mainContainer.removeChild(this);
-                gameMenu.mainContainer.removeChild(gameMenu.background);
-                gameMenu.mainContainer.removeChild(gameMenu.titleText);
-                gameMenu.mainContainer.removeChild(gameMenu.textPlayer1);
-                gameMenu.mainContainer.removeChild(gameMenu.textPlayer2);
-                gameMenu.mainContainer.removeChild(gameMenu.textInputPlayer1);
-                gameMenu.mainContainer.removeChild(gameMenu.textInputPlayer2);
-                var player1 = new Game.Player(gameMenu.textInputPlayer1.text);
-                var player2 = new Game.Player(gameMenu.textInputPlayer2.text);
-                new Game.HeadOrTail(app, player1, player2);
-            }
-            // }
-            );
+            _this.addFunctionallity();
             return _this;
         }
-        PlayButton.prototype.removeErrorTexts = function () {
-            // mainContainer.removeChild(errorEmptyInputText);
-            // mainContainer.removeChild(errorEqualNamesText);
-            // mainContainer.removeChild(errorBiggerLengthText);
+        PlayButton.prototype.addFunctionallity = function () {
+            this.on('pointertap', function () {
+                this.gameMenu.removeErrorTexts();
+                this.namePlayer1 = this.gameMenu.textInputPlayer1.text;
+                this.namePlayer2 = this.gameMenu.textInputPlayer2.text;
+                if (!this.isWrongInput()) {
+                    this.removeMainMenu();
+                    this.startHeadOrTails();
+                }
+            });
         };
         PlayButton.prototype.isWrongInput = function () {
-            // if (player1Input.text === "" || player2Input.text === "") {
-            //     mainContainer.addChild(errorEmptyInputText);
-            //     return true;
-            // } else if (player1Input.text === player2Input.text) {
-            //     mainContainer.addChild(errorEqualNamesText);
-            //     return true;
-            // } else if (player1Input.text.length > 10 || player2Input.text.length > 10) {
-            //     mainContainer.addChild(errorBiggerLengthText);
-            //     return true;
-            // }
-            // return false;
+            if (this.namePlayer1 === "" || this.namePlayer2 === "") {
+                this.mainContainer.addChild(this.gameMenu.errorEmptyInputText);
+                return true;
+            }
+            else if (this.namePlayer1 === this.namePlayer2) {
+                this.mainContainer.addChild(this.gameMenu.errorEqualNamesText);
+                return true;
+            }
+            else if (this.namePlayer1.length > 10 || this.namePlayer2.length > 10) {
+                this.mainContainer.addChild(this.gameMenu.errorBiggerLengthText);
+                return true;
+            }
+            return false;
         };
+        PlayButton.prototype.startHeadOrTails = function () {
+            var player1 = new Game.Player(this.namePlayer1);
+            var player2 = new Game.Player(this.namePlayer2);
+            new Game.HeadOrTail(this.app, player1, player2);
+        };
+        PlayButton.prototype.removeMainMenu = function () {
+            this.mainContainer.removeChild(this);
+            this.mainContainer.removeChild(this.gameMenu.background);
+            this.mainContainer.removeChild(this.gameMenu.titleText);
+            this.mainContainer.removeChild(this.gameMenu.textPlayer1);
+            this.mainContainer.removeChild(this.gameMenu.textPlayer2);
+            this.mainContainer.removeChild(this.gameMenu.textInputPlayer1);
+            this.mainContainer.removeChild(this.gameMenu.textInputPlayer2);
+        };
+        PlayButton.BUTTON_PATH = "assets/playButton.png";
         return PlayButton;
     }(PIXI.Sprite));
     Game.PlayButton = PlayButton;

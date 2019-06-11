@@ -2,21 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="173cf56e-85ca-483c-8320-19ea0b2d1ec7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Game/TextInput.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Game/Utilities.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Game/stylesheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bundle.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/bundle.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/bundle.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/Background.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Background.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/GameMenu.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameMenu.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/HeadOrTails.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/HeadOrTails.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/PixiTypeInput.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/PlayButton.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/PlayButton.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/Utilities.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Utilities.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Utilities.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,74 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Game/Utilities.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="40" column="11" lean-forward="true" selection-start-line="40" selection-start-column="11" selection-end-line="40" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Game/stylesheet.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Game/TextInput.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Game/PlayButton.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="72" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="72" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Game/GameMenu.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="116" column="82" selection-start-line="116" selection-start-column="82" selection-end-line="116" selection-end-column="82" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Game/Main.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Game/HeadOrTails.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="893">
-              <caret line="116" column="1" lean-forward="true" selection-start-line="116" selection-start-column="1" selection-end-line="116" selection-end-column="1" />
+            <state relative-caret-position="306">
+              <caret line="18" column="5" selection-end-line="20" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -123,10 +54,12 @@
       <find>window as</find>
       <find>init</find>
       <find>PIXI.Text</find>
+      <find>app</find>
     </findStrings>
     <replaceStrings>
       <replace>errorEmptyInputText</replace>
       <replace>errorEqualNamesText</replace>
+      <replace>_app</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -161,18 +94,18 @@
         <option value="$PROJECT_DIR$/src/Game/Player.ts" />
         <option value="$PROJECT_DIR$/src/Game/Background.ts" />
         <option value="$PROJECT_DIR$/src/Game/Utilities.ts" />
-        <option value="$PROJECT_DIR$/src/Game/PlayButton.ts" />
         <option value="$PROJECT_DIR$/src/Game/PixiTypeInput.js" />
         <option value="$PROJECT_DIR$/src/Game/TextInput.ts" />
         <option value="$PROJECT_DIR$/src/Game/InputText.js" />
         <option value="$PROJECT_DIR$/bundle.d.ts" />
         <option value="$PROJECT_DIR$/src/Game/stylesheet.css" />
-        <option value="$PROJECT_DIR$/src/Game/HeadOrTails.ts" />
         <option value="$PROJECT_DIR$/src/Game/TextInput.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/src/Game/Main.ts" />
-        <option value="$PROJECT_DIR$/src/Game/GameMenu.ts" />
         <option value="$PROJECT_DIR$/src/Game/Utilities.js" />
+        <option value="$PROJECT_DIR$/src/Game/Main.ts" />
+        <option value="$PROJECT_DIR$/src/Game/HeadOrTails.ts" />
+        <option value="$PROJECT_DIR$/src/Game/GameMenu.ts" />
+        <option value="$PROJECT_DIR$/src/Game/PlayButton.ts" />
       </list>
     </option>
   </component>
@@ -238,14 +171,14 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\pixiJS-TicTacToe\src\Game" />
+      <recent name="C:\Projects\pixiJS-TicTacToe" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Projects\pixiJS-TicTacToe\src\Game" />
       <recent name="C:\Projects\pixiJS-TicTacToe\source" />
       <recent name="C:\Projects\TictacToe" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Projects\pixiJS-TicTacToe\src\Game" />
-      <recent name="C:\Projects\pixiJS-TicTacToe" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -295,17 +228,18 @@
       <workItem from="1559893763637" duration="12204000" />
       <workItem from="1559916031769" duration="1515000" />
       <workItem from="1560150454196" duration="23639000" />
+      <workItem from="1560235701047" duration="5462000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80172000" />
+    <option name="totallyTimeSpent" value="85634000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1691254" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.1691254" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -324,6 +258,26 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1691254" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32981783" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32981783" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39980826" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32981783" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="TypeScript" order="11" weight="0.32981783" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -400,12 +354,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bundle.js.map">
+      <provider editor-type-id="sourcemapFileViewerProvider" />
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="55" selection-start-column="55" selection-end-column="55" />
         </state>
       </provider>
-      <provider editor-type-id="sourcemapFileViewerProvider" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game/Background.ts">
       <provider selected="true" editor-type-id="text-editor">
@@ -414,13 +368,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/PixiTypeInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game/PixiTypeInput.js" />
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -428,20 +376,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/TextInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/TextInput.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game/TextInput.ts" />
     <entry file="file://$PROJECT_DIR$/bundle.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -459,24 +394,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/Utilities.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="9" lean-forward="true" selection-end-line="52" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game/Utilities.ts" />
     <entry file="file://$PROJECT_DIR$/bundle.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/PlayButton.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="72" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="72" />
         </state>
       </provider>
     </entry>
@@ -487,52 +409,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game/Utilities.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game/HeadOrTails.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="116" column="1" lean-forward="true" selection-start-line="116" selection-start-column="1" selection-end-line="116" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/stylesheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="1411">
+          <caret line="83" column="37" lean-forward="true" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game/TextInput.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/Main.ts">
+    <entry file="file://$PROJECT_DIR$/src/Game/stylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game/GameMenu.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="116" column="82" selection-start-line="116" selection-start-column="82" selection-end-line="116" selection-end-column="82" />
+        <state relative-caret-position="1054">
+          <caret line="99" selection-start-line="99" selection-end-line="99" />
+          <folding>
+            <element signature="n#!!block;n#errorEmptyInputText#0;n#GameMenu#0;n#Game#0" />
+            <element signature="n#!!block;n#errorEmptyInputText#1;n#GameMenu#0;n#Game#0" />
+            <element signature="n#!!block;n#errorEmptyInputText#2;n#GameMenu#0;n#Game#0" />
+            <element signature="n#!!block;n#titleText#0;n#GameMenu#0;n#Game#0" />
+            <element signature="n#!!block;n#mainContainer#0;n#GameMenu#0;n#Game#0" />
+            <element signature="n#!!block;n#textPlayer1#0;n#GameMenu#0;n#Game#0" />
+            <element signature="n#!!block;n#textPlayer2#0;n#GameMenu#0;n#Game#0" />
+            <element signature="n#!!block;n#background#0;n#GameMenu#0;n#Game#0" />
+            <element signature="n#!!block;n#textInputPlayer1#0;n#GameMenu#0;n#Game#0" />
+            <element signature="n#!!block;n#textInputPlayer2#0;n#GameMenu#0;n#Game#0" />
+            <element signature="n#!!block;n#app#0;n#GameMenu#0;n#Game#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/Utilities.js">
+    <entry file="file://$PROJECT_DIR$/src/Game/PlayButton.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="40" column="11" lean-forward="true" selection-start-line="40" selection-start-column="11" selection-end-line="40" selection-end-column="11" />
+        <state relative-caret-position="323">
+          <caret line="61" column="49" lean-forward="true" selection-start-line="61" selection-start-column="49" selection-end-line="61" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game/Main.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="5" selection-end-line="20" selection-end-column="7" />
         </state>
       </provider>
     </entry>

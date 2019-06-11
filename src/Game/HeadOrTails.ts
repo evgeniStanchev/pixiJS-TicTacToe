@@ -73,10 +73,10 @@ namespace Game {
         }
 
         init() {
-            this._namePlayer1 = GameMenu.Utilities.getBitmapTextField(this._player1.name, 50, "center", this._app.screen.width / 6, this._app.screen.height / 10);
+            this._namePlayer1 = GameMenu.Utilities.getBitmapTextField(this._player1.name, 50, "center", this._app.screen.width / 5.5, this._app.screen.height / 10);
             this._app.stage.addChild(this._namePlayer1);
 
-            this._namePlayer2 = GameMenu.Utilities.getBitmapTextField(this._player2.name, 50, "center", this._app.screen.width / 1.6, this._app.screen.height / 10);
+            this._namePlayer2 = GameMenu.Utilities.getBitmapTextField(this._player2.name, 50, "center", this._app.screen.width / 1.5, this._app.screen.height / 10);
             this._app.stage.addChild(this._namePlayer2);
 
             this._coinSprite = GameMenu.Utilities.getSprite(this._headTexture, true, true, this._app.screen.width / 2, this._app.screen.height / 1.5, this.MAX_SIZE_COIN, this.MAX_SIZE_COIN);

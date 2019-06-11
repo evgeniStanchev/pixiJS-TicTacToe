@@ -24,6 +24,16 @@ function Utilities() {
         return richText;
     }
 
+    this.getBitmapTextField = function GetBitmapTextField(text, px, textAlign, x, y) {
+        const bitmapTextField = new PIXI.extras.BitmapText(text, {
+            font: px + 'px Desyrel',
+            align: textAlign
+        });
+        bitmapTextField.x = x;
+        bitmapTextField.y = y
+        return bitmapTextField;
+    }
+
     this.getTextInput = function GetTextInput(text) {
         let textInput = new PIXI.TextInput({
             input: {
